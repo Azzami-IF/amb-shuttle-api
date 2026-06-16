@@ -14,4 +14,10 @@ router.get(
   authController.profile
 );
 
+router.patch(
+  "/profile",
+  authMiddleware,
+  authController.updateProfile
+);
+
 module.exports = router;

@@ -19,4 +19,6 @@ router.get(
   bookingController.getMyHistory
 );
 
+router.get("/:id", authMiddleware, bookingController.getBookingDetails);
+
 module.exports = router;

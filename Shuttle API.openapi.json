@@ -1,0 +1,943 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Shuttle API",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [],
+  "paths": {
+    "/api/auth/register": {
+      "post": {
+        "summary": "Register",
+        "deprecated": false,
+        "description": "Mendaftarkan akun baru khusus untuk customer/penumpang.",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": {
+                "name": "Budi Santoso",
+                "email": "budi@example.com",
+                "phone": "081234567890",
+                "password": "password123",
+                "password_confirmation": "password123"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "summary": "Login",
+        "deprecated": false,
+        "description": "User (Customer, Driver, Admin) dapat melakukan login ke sistem.",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": {
+                "email": "budi.santoso@email.com",
+                "password": "password123"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/user/profile": {
+      "get": {
+        "summary": "Update Profile & Password",
+        "deprecated": false,
+        "description": "Mengambil detail data pengguna yang sedang login.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": {
+                "name": "Budi Santoso Update",
+                "phone": "081299998888",
+                "old_password": "password123",
+                "new_password": "newpassword456",
+                "new_password_confirmation": "newpassword456"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/schedules": {
+      "get": {
+        "summary": "Get Available Seats",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": {
+                "status": "success",
+                "message": "Data kursi berhasil diambil",
+                "data": {
+                  "schedule_id": 101,
+                  "total_capacity": 14,
+                  "seats": [
+                    {
+                      "seat_number": "1",
+                      "status": "booked"
+                    },
+                    {
+                      "seat_number": "2",
+                      "status": "available"
+                    },
+                    {
+                      "seat_number": "3",
+                      "status": "available"
+                    },
+                    {
+                      "seat_number": "4",
+                      "status": "booked"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "post": {
+        "summary": "Create Schedule",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/bookings": {
+      "post": {
+        "summary": "Create Booking",
+        "deprecated": false,
+        "description": "Digunakan oleh customer untuk melakukan pemesanan kursi pada jadwal tertentu.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": {
+                "schedule_id": 101,
+                "seat_numbers": [
+                  "2",
+                  "3"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/bookings/my-history": {
+      "get": {
+        "summary": "Get My Booking History",
+        "deprecated": false,
+        "description": "Mengambil daftar semua pemesanan (histori) yang pernah dilakukan oleh user yang sedang login.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": {
+                "status": "success",
+                "message": "Histori booking berhasil diambil",
+                "data": [
+                  {
+                    "booking_id": "BKG-101-001",
+                    "origin": "Jakarta",
+                    "destination": "Bandung",
+                    "departure_time": "2026-05-02 08:00:00",
+                    "seat_numbers": [
+                      "2",
+                      "3"
+                    ],
+                    "total_price": 300000,
+                    "status": "booked"
+                  },
+                  {
+                    "booking_id": "BKG-090-123",
+                    "origin": "Bandung",
+                    "destination": "Jakarta",
+                    "departure_time": "2026-04-20 15:00:00",
+                    "seat_numbers": [
+                      "5"
+                    ],
+                    "total_price": 150000,
+                    "status": "completed"
+                  }
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/bookings/{id}": {
+      "get": {
+        "summary": "Get Booking Details",
+        "deprecated": false,
+        "description": "Melihat detail spesifik dari sebuah transaksi booking beserta statusnya (booked, cancelled, completed). Parameter {id} di URL bisa diisi dengan booking_id.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": {
+                "status": "success",
+                "message": "Detail booking berhasil diambil",
+                "data": {
+                  "booking_id": "BKG-101-001",
+                  "user": {
+                    "name": "Budi Santoso",
+                    "phone": "081234567890"
+                  },
+                  "schedule": {
+                    "origin": "Jakarta",
+                    "destination": "Bandung",
+                    "departure_time": "2026-05-02 08:00:00",
+                    "vehicle_name": "HiAce Commuter A1"
+                  },
+                  "seat_numbers": [
+                    "2",
+                    "3"
+                  ],
+                  "total_price": 300000,
+                  "payment_status": "paid",
+                  "status": "booked"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/trips/{id}/status": {
+      "patch": {
+        "summary": "Update Trip Status",
+        "deprecated": false,
+        "description": "Digunakan oleh driver untuk mengubah status perjalanan. Status yang diizinkan sesuai dokumen Anda adalah: scheduled, on-going, dan completed.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": {
+                "status": "on-going"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/trips/{id}/location": {
+      "get": {
+        "summary": "Update Live Location",
+        "deprecated": false,
+        "description": "Digunakan oleh aplikasi mobile Driver untuk mengirimkan koordinat latitude dan longitude secara berkala ke server.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": {
+                "latitude": -6.2,
+                "longitude": 106.816666
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/trips/{id}/track": {
+      "get": {
+        "summary": "Get Shuttle Live Location",
+        "deprecated": false,
+        "description": "Digunakan oleh Customer atau Admin untuk mengambil titik koordinat terakhir dari shuttle yang sedang berjalan.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": {
+                "status": "success",
+                "message": "Data tracking berhasil diambil",
+                "data": {
+                  "trip_id": 101,
+                  "status": "on-going",
+                  "origin": "Jakarta",
+                  "destination": "Bandung",
+                  "driver_name": "Agus Supriyadi",
+                  "current_location": {
+                    "latitude": -6.2,
+                    "longitude": 106.816666,
+                    "last_updated": "2026-05-02 08:15:30"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/admin/schedules": {
+      "post": {
+        "summary": "Create Schedule",
+        "deprecated": false,
+        "description": "Digunakan oleh Admin untuk membuat jadwal perjalanan baru. Admin harus memasukkan lokasi asal, tujuan, waktu keberangkatan, armada yang digunakan, dan harga tiket.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": {
+                "origin": "Jakarta",
+                "destination": "Bandung",
+                "departure_time": "2026-05-10 08:00:00",
+                "arrival_time": "2026-05-10 11:00:00",
+                "fleet_id": 1,
+                "price": 150000
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/admin/schedules/{id}": {
+      "delete": {
+        "summary": "Delete Schedule",
+        "deprecated": false,
+        "description": "Digunakan oleh Admin untuk membatalkan atau menghapus jadwal perjalanan berdasarkan ID jadwal. Biasanya dilakukan jika ada kendala operasional pada kendaraan.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": {
+                "status": "success",
+                "message": "Jadwal berhasil dihapus",
+                "data": null
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/admin/fleets": {
+      "get": {
+        "summary": "Manage Fleets",
+        "deprecated": false,
+        "description": "Menampilkan seluruh daftar armada kendaraan yang dimiliki oleh sistem beserta informasi kapasitas kursi masing-masing kendaraan.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": ""
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Add New Fleet",
+        "deprecated": false,
+        "description": "Digunakan oleh Admin untuk mendaftarkan armada kendaraan baru ke dalam sistem, lengkap dengan nama kendaraan, plat nomor, dan total kapasitas kursi.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": {
+                "vehicle_name": "Toyota HiAce Premio",
+                "license_plate": "D 5678 ABC",
+                "capacity": 12,
+                "status": "active"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/admin/bookings": {
+      "get": {
+        "summary": "Get All Bookings",
+        "deprecated": false,
+        "description": "Menampilkan riwayat dan status seluruh transaksi pemesanan (booking) dari semua pelanggan. Digunakan oleh Admin untuk keperluan monitoring dan pelaporan.",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/admin/bookings/{id}/status": {
+      "patch": {
+        "summary": "Update Booking Status",
+        "deprecated": false,
+        "description": "Digunakan oleh Admin untuk mengubah status pemesanan secara manual (misalnya mengubah status menjadi 'cancelled' jika pelanggan melanggar aturan).",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": {
+                "status": "cancelled"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {},
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "servers": [],
+  "security": []
+}
