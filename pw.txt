@@ -1,0 +1,3 @@
+DB=ambt1462_ambshuttle
+USER=ambt1462_ambuser
+PASSWORD=WsM~gw_F%u[@L[Ur
